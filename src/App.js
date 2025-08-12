@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import Layout from './components/Layout';
 
-function App() {
+import ProfilePage from './pages/ProfilePage';
+import Dashboard from './pages/Dashboard';
+import Calendar from './pages/Calendar';
+
+const App = () => {
+  const [currentPage, setCurrentPage] = useState('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'dashboard':
+        return <Dashboard />;
+      case 'calendar':
+        return <Calendar />;
+      case 'profile':
+        return <ProfilePage />;
+      default:
+        return <Dashboard />;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout 
+      sidebarOpen={sidebarOpen}
+      setSidebarOpen={setSidebarOpen}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+    >
+      {renderPage()}
+    </Layout>
   );
-}
+};
 
 export default App;
