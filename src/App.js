@@ -1,37 +1,26 @@
 import React, { useState } from 'react';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-
 import ProfilePage from './pages/ProfilePage';
 import Dashboard from './pages/Dashboard';
 import Calendar from './pages/Calendar';
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'dashboard':
-        return <Dashboard />;
-      case 'calendar':
-        return <Calendar />;
-      case 'profile':
-        return <ProfilePage />;
-      default:
-        return <Dashboard />;
-    }
-  };
-
   return (
-    <Layout 
+    <Layout
       sidebarOpen={sidebarOpen}
       setSidebarOpen={setSidebarOpen}
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
     >
-      {renderPage()}
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        {/* Fallback route for any unmatched paths */}
+        <Route path="*" element={<Dashboard />} />
+      </Routes>
     </Layout>
   );
 };

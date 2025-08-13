@@ -128,9 +128,9 @@ const Calendar = () => {
         </button>
       </div>
 
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-col lg:flex-row gap-4">
         {/* Calendar Section */}
-        <div className="bg-[#F8F8FC] rounded-xl p-6 shadow-sm">
+        <div className="bg-[#F8F8FC] rounded-xl p-6 shadow-sm w-full lg:w-3/4 overflow-x-auto">
           {/* Calendar Header */}
           <div className="flex items-center justify-between mb-6">
             <div className="bg-[#D6D0FD] px-4 py-2 rounded-lg">

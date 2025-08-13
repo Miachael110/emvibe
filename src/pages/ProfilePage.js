@@ -1,9 +1,5 @@
-
-import React, { useState } from 'react';
-import { Home, User, Menu, X } from 'lucide-react';
-import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
-import { dashboardData } from '../data/dashboardData';
+import React from 'react';
+import { User } from 'lucide-react';
 
 const ProfilePage = () => {
   return (
@@ -59,29 +55,4 @@ const ProfilePage = () => {
   );
 };
 
-// Main Layout Component
-const Layout = ({ children, sidebarOpen, setSidebarOpen, currentPage, setCurrentPage }) => {
-  return (
-    <div className="min-h-screen bg-gray-100">
-<Header 
-  sidebarOpen={sidebarOpen} 
-  setSidebarOpen={setSidebarOpen} 
-  user={dashboardData.user}
-/>
-      
-      <div className="flex">
-        <Sidebar 
-          currentPage={currentPage} 
-          setCurrentPage={setCurrentPage}
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-        />
-        
-        <main className="flex-1 lg:ml-0">
-          {children}
-        </main>
-      </div>
-    </div>
-  );
-};
 export default ProfilePage;

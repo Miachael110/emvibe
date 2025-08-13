@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
-const Layout = ({ children, sidebarOpen, setSidebarOpen, currentPage, setCurrentPage }) => {
+const Layout = ({ children, sidebarOpen, setSidebarOpen }) => {
   return (
     <div className="min-h-screen py-2 bg-gray-100">
       <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       
       <div className="flex">
-        <Sidebar 
-          currentPage={currentPage} 
-          setCurrentPage={setCurrentPage}
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-        />
+        <Sidebar />
         
         <main className="flex-1 lg:ml-0">
           {children}

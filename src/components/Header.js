@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { dashboardData } from "../data/dashboardData";
 import { Search, Settings, Bell } from "lucide-react";
 
-const Header = ({ user , sidebarOpen, setSidebarOpen }) => {
+const Header = ({ sidebarOpen, setSidebarOpen }) => {
   const [showSearch, setShowSearch] = useState(false);
+  const { user } = dashboardData;
+
+  // Generate avatar initials
+  const initials = user?.name ? user.name.charAt(0).toUpperCase() : "G";
 
   return (
-    
     <header className="bg-[#F8F8FC] border-b border-gray-200 px-4 py-2 flex items-center justify-between ml-20 rounded-xl mr-3">
-      {/* Left - App Name */}
+      {/* Left - Name */}
       <div className="flex items-center space-x-2">
         <div className="w-5 h-5 bg-yellow-200 rounded-sm"></div>
         <h1 className="text-sm font-medium text-gray-800">
@@ -16,31 +19,35 @@ const Header = ({ user , sidebarOpen, setSidebarOpen }) => {
         </h1>
       </div>
 
-      {/* Right - Icons & Search */}
+      {/* Right - Icons */}
       <div className="flex items-center space-x-3">
-        <div className="flex items-center">
-          <Search
-            size={18}
-            className="text-gray-500 cursor-pointer"
-            onClick={() => setShowSearch(!showSearch)}
-          />
-          <input
-            type="text"
-            placeholder="Search..."
-            className={`transition-all duration-300 ease-in-out border border-gray-200 rounded-lg px-3 py-1 ml-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300 ${
-              showSearch ? "w-40 opacity-100" : "w-0 opacity-0 overflow-hidden"
-            }`}
-          />
+        {/* Search Icon */}
+        <div
+          className="w-9 h-9 flex items-center justify-center rounded-full bg-purple-100 cursor-pointer"
+          onClick={() => setShowSearch(!showSearch)}
+        >
+          <Search size={18} className="text-gray-700" />
         </div>
 
-        <Settings size={18} className="text-gray-500 cursor-pointer" />
-        <Bell size={18} className="text-gray-500 cursor-pointer" />
+        {/* Settings Icon */}
+        <div className="w-9 h-9 flex items-center justify-center rounded-full bg-yellow-100 cursor-pointer">
+          <Settings size={18} className="text-gray-700" />
+        </div>
 
-        <img
-          src="https://via.placeholder.com/28"
-          alt={user?.name || "avatar"}
-          className="w-7 h-7 rounded-full"
-        />
+        {/* Notification Icon with Badge */}
+        <div className="relative">
+          <div className="w-9 h-9 flex items-center justify-center rounded-full bg-black cursor-pointer">
+            <Bell size={18} className="text-white" />
+          </div>
+          <span className="absolute -top-1 -right-1 bg-purple-200 text-black text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+            2
+          </span>
+        </div>
+
+        {/* Avatar - Name Initial */}
+        <div className="w-9 h-9 flex items-center justify-center rounded-full bg-yellow-500 text-white font-bold cursor-pointer">
+          {initials}
+        </div>
       </div>
     </header>
   );
